@@ -1,0 +1,92 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Início";
+}
+
+<div class="text-center">
+    <div class="py-5">
+        <i class="bi bi-film text-primary" style="font-size: 4rem;"></i>
+        <h1 class="display-4 fw-bold mt-3">RazorPagesMovie</h1>
+        <p class="lead text-muted">
+            Catálogo profissional de filmes com <strong>ASP.NET Core</strong> e <strong>.NET 10</strong>
+        </p>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a asp-page="/Movies/Index" class="btn btn-primary btn-lg px-4">
+                <i class="bi bi-collection-play"></i> Ver Catálogo
+            </a>
+            <a asp-page="/Movies/Create" class="btn btn-outline-primary btn-lg px-4">
+                <i class="bi bi-plus-circle"></i> Adicionar Filme
+            </a>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    @if (Model.TotalMovies > 0)
+    {
+        <div class="row g-3 justify-content-center mb-5">
+            <div class="col-md-3 col-6">
+                <div class="card border-0 bg-primary bg-opacity-10 shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <div class="fs-2 fw-bold text-primary">@Model.TotalMovies</div>
+                        <div class="small text-muted">Filmes Cadastrados</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card border-0 bg-success bg-opacity-10 shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <div class="fs-2 fw-bold text-success">@Model.AvailableMovies</div>
+                        <div class="small text-muted">Disponíveis</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card border-0 bg-info bg-opacity-10 shadow-sm">
+                    <div class="card-body text-center py-3">
+                        <div class="fs-2 fw-bold text-info">@Model.GenreCount</div>
+                        <div class="small text-muted">Gêneros</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <hr class="my-5" />
+
+    <div class="row g-4 text-start">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-database text-primary" style="font-size: 2.5rem;"></i>
+                    <h5 class="card-title mt-3 fw-bold">Banco de Dados</h5>
+                    <p class="card-text text-muted small">
+                        Persistência com Entity Framework Core e SQLite para armazenamento local eficiente.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-search text-primary" style="font-size: 2.5rem;"></i>
+                    <h5 class="card-title mt-3 fw-bold">Busca Avançada</h5>
+                    <p class="card-text text-muted small">
+                        Filtre filmes por título, gênero e avaliação com paginação integrada.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center py-4">
+                    <i class="bi bi-shield-check text-primary" style="font-size: 2.5rem;"></i>
+                    <h5 class="card-title mt-3 fw-bold">Validação</h5>
+                    <p class="card-text text-muted small">
+                        Validação robusta com Data Annotations e feedback visual em tempo real.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

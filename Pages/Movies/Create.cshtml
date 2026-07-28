@@ -1,0 +1,122 @@
+@page
+@model RazorPagesMovie.Pages.Movies.CreateModel
+@{
+    ViewData["Title"] = "Adicionar Filme";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Movies/Index">Filmes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Adicionar</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-transparent border-0">
+            <h1 class="h3 mb-0"><i class="bi bi-plus-circle"></i> Novo Filme</h1>
+        </div>
+        <div class="card-body">
+            <form method="post" class="row g-3 needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="col-md-6">
+                    <label asp-for="Movie.Title" class="form-label fw-semibold"></label>
+                    <input asp-for="Movie.Title" class="form-control" placeholder="Ex: Matrix" />
+                    <span asp-validation-for="Movie.Title" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="Movie.ReleaseDate" class="form-label fw-semibold"></label>
+                    <input asp-for="Movie.ReleaseDate" class="form-control" type="date" />
+                    <span asp-validation-for="Movie.ReleaseDate" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="Movie.Genre" class="form-label fw-semibold"></label>
+                    <select asp-for="Movie.Genre" class="form-select">
+                        <option value="">Selecione...</option>
+                        <option value="Ação">Ação</option>
+                        <option value="Animação">Animação</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Comédia">Comédia</option>
+                        <option value="Documentário">Documentário</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Ficção Científica">Ficção Científica</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Suspense">Suspense</option>
+                        <option value="Terror">Terror</option>
+                    </select>
+                    <span asp-validation-for="Movie.Genre" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="Movie.Price" class="form-label fw-semibold"></label>
+                    <div class="input-group">
+                        <span class="input-group-text">R$</span>
+                        <input asp-for="Movie.Price" class="form-control" placeholder="29,90" />
+                    </div>
+                    <span asp-validation-for="Movie.Price" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="Movie.Rating" class="form-label fw-semibold"></label>
+                    <input asp-for="Movie.Rating" class="form-control" placeholder="Ex: 8.5" step="0.1" min="0" max="10" />
+                    <span asp-validation-for="Movie.Rating" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="Movie.Director" class="form-label fw-semibold"></label>
+                    <input asp-for="Movie.Director" class="form-control" placeholder="Ex: Christopher Nolan" />
+                    <span asp-validation-for="Movie.Director" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="Movie.DurationInMinutes" class="form-label fw-semibold"></label>
+                    <input asp-for="Movie.DurationInMinutes" class="form-control" placeholder="Ex: 120" type="number" />
+                    <span asp-validation-for="Movie.DurationInMinutes" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="Movie.AgeRating" class="form-label fw-semibold"></label>
+                    <select asp-for="Movie.AgeRating" class="form-select">
+                        <option value="">Selecione...</option>
+                        <option value="L">Livre</option>
+                        <option value="10">10 anos</option>
+                        <option value="12">12 anos</option>
+                        <option value="14">14 anos</option>
+                        <option value="16">16 anos</option>
+                        <option value="18">18 anos</option>
+                    </select>
+                    <span asp-validation-for="Movie.AgeRating" class="text-danger small"></span>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-check">
+                        <input asp-for="Movie.IsAvailable" class="form-check-input" checked />
+                        <label asp-for="Movie.IsAvailable" class="form-check-label"></label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Movie.Description" class="form-label fw-semibold"></label>
+                    <textarea asp-for="Movie.Description" class="form-control" rows="4" placeholder="Sinopse do filme..."></textarea>
+                    <span asp-validation-for="Movie.Description" class="text-danger small"></span>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-check-lg"></i> Salvar
+                    </button>
+                    <a asp-page="./Index" class="btn btn-outline-secondary px-4 ms-2">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

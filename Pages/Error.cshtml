@@ -1,0 +1,41 @@
+@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Erro";
+}
+
+<div class="container text-center py-5">
+    <div class="py-5">
+        <i class="bi bi-exclamation-triangle text-danger" style="font-size: 5rem;"></i>
+        <h1 class="display-4 fw-bold mt-3 text-danger">Erro</h1>
+        <h2 class="text-muted">Ocorreu um erro ao processar sua solicitação.</h2>
+
+        @if (Model.ShowRequestId)
+        {
+            <p class="mt-4">
+                <strong>ID da Solicitação:</strong>
+                <code class="bg-light px-2 py-1 rounded">@Model.RequestId</code>
+            </p>
+        }
+
+        <hr class="my-4 w-25 mx-auto" />
+
+        <div class="alert alert-warning text-start d-inline-block text-center mx-auto" role="alert">
+            <h5 class="alert-heading fw-semibold">
+                <i class="bi bi-bug"></i> Ambiente de Desenvolvimento
+            </h5>
+            <p class="small mb-0">
+                Trocar para o ambiente <strong>Development</strong> exibe informações detalhadas sobre o erro ocorrido.
+                <br />
+                O ambiente <strong>Development</strong> não deve ser ativado em aplicações publicadas,
+                pois pode resultar em vazamento de informações sensíveis para usuários finais.
+            </p>
+        </div>
+
+        <div class="mt-4">
+            <a asp-page="/Index" class="btn btn-primary px-4">
+                <i class="bi bi-house"></i> Voltar ao Início
+            </a>
+        </div>
+    </div>
+</div>

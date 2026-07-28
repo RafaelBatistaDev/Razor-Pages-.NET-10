@@ -1,0 +1,139 @@
+@page
+@model RazorPagesMovie.Pages.Movies.DetailsModel
+@{
+    ViewData["Title"] = Model.Movie.Title;
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Movies/Index">Filmes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detalhes</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-0">@Model.Movie.Title</h1>
+            <span class="badge bg-primary-subtle text-primary-emphasis fs-6">@Model.Movie.Genre</span>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    @if (!string.IsNullOrEmpty(Model.Movie.Description))
+                    {
+                        <h5 class="fw-semibold">Sinopse</h5>
+                        <p class="text-muted">@Model.Movie.Description</p>
+                        <hr />
+                    }
+
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <h6 class="fw-semibold text-muted small text-uppercase">Data de Lançamento</h6>
+                            <p class="mb-0">@Model.Movie.ReleaseDate.ToString("dd/MM/yyyy")</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <h6 class="fw-semibold text-muted small text-uppercase">Preço</h6>
+                            <p class="mb-0 fs-5 fw-bold text-primary">@Model.Movie.Price.ToString("C2")</p>
+                        </div>
+
+                        @if (Model.Movie.Rating.HasValue)
+                        {
+                            <div class="col-sm-6">
+                                <h6 class="fw-semibold text-muted small text-uppercase">Avaliação</h6>
+                                <p class="mb-0">
+                                    <span class="text-warning">★</span> @Model.Movie.Rating.Value.ToString("F1") / 10.0
+                                </p>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.Movie.Director))
+                        {
+                            <div class="col-sm-6">
+                                <h6 class="fw-semibold text-muted small text-uppercase">Diretor</h6>
+                                <p class="mb-0">@Model.Movie.Director</p>
+                            </div>
+                        }
+
+                        @if (Model.Movie.DurationInMinutes.HasValue)
+                        {
+                            <div class="col-sm-6">
+                                <h6 class="fw-semibold text-muted small text-uppercase">Duração</h6>
+                                <p class="mb-0">@Model.Movie.DurationInMinutes minutos</p>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.Movie.AgeRating))
+                        {
+                            <div class="col-sm-6">
+                                <h6 class="fw-semibold text-muted small text-uppercase">Classificação</h6>
+                                <p class="mb-0">
+                                    @if (Model.Movie.AgeRating == "L")
+                                    {
+                                        <span>Livre para todos os públicos</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@Model.Movie.AgeRating anos</span>
+                                    }
+                                </p>
+                            </div>
+                        }
+
+                        <div class="col-sm-6">
+                            <h6 class="fw-semibold text-muted small text-uppercase">Disponibilidade</h6>
+                            @if (Model.Movie.IsAvailable)
+                            {
+                                <span class="badge bg-success">Disponível</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Indisponível</span>
+                            }
+                        </div>
+
+                        <div class="col-sm-6">
+                            <h6 class="fw-semibold text-muted small text-uppercase">Cadastrado em</h6>
+                            <p class="mb-0">@Model.Movie.CreatedAt.ToString("dd/MM/yyyy 'às' HH:mm")</p>
+                        </div>
+
+                        @if (Model.Movie.UpdatedAt.HasValue)
+                        {
+                            <div class="col-sm-6">
+                                <h6 class="fw-semibold text-muted small text-uppercase">Última atualização</h6>
+                                <p class="mb-0">@Model.Movie.UpdatedAt.Value.ToString("dd/MM/yyyy 'às' HH:mm")</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card bg-light border-0">
+                        <div class="card-body text-center">
+                            @if (Model.Movie.Rating.HasValue)
+                            {
+                                <div class="display-1 fw-bold text-warning mb-2">
+                                    @Model.Movie.Rating.Value.ToString("F1")
+                                </div>
+                                <p class="text-muted mb-0">de 10 estrelas</p>
+                            }
+                            <hr />
+                            <div class="d-grid gap-2">
+                                <a asp-page="./Edit" asp-route-id="@Model.Movie.Id" class="btn btn-primary">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </a>
+                                <a asp-page="./Delete" asp-route-id="@Model.Movie.Id" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash"></i> Excluir
+                                </a>
+                                <a asp-page="./Index" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left"></i> Voltar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Política de Privacidade";
+}
+
+<div class="container">
+    <h1 class="fw-bold"><i class="bi bi-shield-check"></i> @ViewData["Title"]</h1>
+    <p class="lead text-muted">Última atualização: @DateTime.Now.ToString("dd/MM/yyyy")</p>
+
+    <hr />
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <h5 class="fw-semibold">1. Informações Coletadas</h5>
+            <p>
+                Esta aplicação não coleta informações pessoais dos usuários. Todos os dados inseridos
+                (filmes, descrições, avaliações) são armazenados localmente em um banco de dados SQLite
+                e não são compartilhados com terceiros.
+            </p>
+
+            <h5 class="fw-semibold mt-4">2. Cookies</h5>
+            <p>
+                Esta aplicação utiliza cookies essenciais para o funcionamento da sessão de autenticação
+                (antiforgery token). Nenhum cookie de rastreamento ou publicidade é utilizado.
+            </p>
+
+            <h5 class="fw-semibold mt-4">3. Armazenamento de Dados</h5>
+            <p>
+                Os dados dos filmes são armazenados em um banco SQLite local no servidor.
+                Recomendamos a realização de backups periódicos do arquivo de banco de dados.
+            </p>
+
+            <h5 class="fw-semibold mt-4">4. Contato</h5>
+            <p>
+                Para questões relacionadas a esta política de privacidade, entre em contato através do
+                repositório do projeto no GitHub.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <div class="card bg-light border-0">
+                <div class="card-body">
+                    <h6 class="fw-bold"><i class="bi bi-info-circle"></i> Resumo</h6>
+                    <ul class="list-unstyled small mb-0">
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Sem coleta de dados pessoais</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Sem cookies de rastreamento</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Dados armazenados localmente</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Código aberto (MIT)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

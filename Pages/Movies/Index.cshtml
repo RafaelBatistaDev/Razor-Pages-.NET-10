@@ -1,0 +1,185 @@
+@page
+@model RazorPagesMovie.Pages.Movies.IndexModel
+@{
+    ViewData["Title"] = "Filmes";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">
+            <i class="bi bi-film"></i> Catálogo de Filmes
+        </h1>
+        <a asp-page="Create" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Novo Filme
+        </a>
+    </div>
+
+    <!-- Search Form -->
+    <div class="card shadow-sm mb-4 border-0">
+        <div class="card-body">
+            <form method="get" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label asp-for="SearchTitle" class="form-label fw-semibold">Buscar por título</label>
+                    <input asp-for="SearchTitle" class="form-control" placeholder="Digite o nome do filme..." />
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="SearchGenre" class="form-label fw-semibold">Gênero</label>
+                    <select asp-for="SearchGenre" asp-items="Model.Genres" class="form-select">
+                        <option value="">Todos os gêneros</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="SearchRating" class="form-label fw-semibold">Avaliação mínima</label>
+                    <select asp-for="SearchRating" class="form-select">
+                        <option value="">Qualquer</option>
+                        <option value="5">★ 5+</option>
+                        <option value="6">★ 6+</option>
+                        <option value="7">★ 7+</option>
+                        <option value="8">★ 8+</option>
+                        <option value="9">★ 9+</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-grid">
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="bi bi-search"></i> Filtrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (!Model.Movie.Any())
+    {
+        <div class="alert alert-info text-center py-5" role="alert">
+            <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+            <h4 class="alert-heading">Nenhum filme encontrado</h4>
+            <p class="mb-0">Nenhum filme corresponde aos critérios de busca. @(string.IsNullOrEmpty(Model.SearchTitle) ? "Clique em \"Novo Filme\" para adicionar o primeiro!" : "Tente ajustar os filtros.")</p>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var item in Model.Movie)
+            {
+                <div class="col-sm-6 col-lg-4 col-xl-3">
+                    <div class="card h-100 shadow-sm border-0 movie-card">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="badge bg-primary-subtle text-primary-emphasis">@item.Genre</span>
+                                @if (item.Rating.HasValue)
+                                {
+                                    <span class="badge bg-warning-subtle text-warning-emphasis">
+                                        ★ @item.Rating.Value.ToString("F1")
+                                    </span>
+                                }
+                            </div>
+                            <h5 class="card-title fw-bold">@item.Title</h5>
+                            @if (!string.IsNullOrEmpty(item.Director))
+                            {
+                                <p class="card-text text-muted small mb-1">
+                                    <i class="bi bi-person"></i> @item.Director
+                                </p>
+                            }
+                            <p class="card-text text-muted small mb-1">
+                                <i class="bi bi-calendar"></i> @item.ReleaseDate.ToString("dd/MM/yyyy")
+                            </p>
+                            @if (item.DurationInMinutes.HasValue)
+                            {
+                                <p class="card-text text-muted small mb-1">
+                                    <i class="bi bi-clock"></i> @item.DurationInMinutes min
+                                </p>
+                            }
+                            <p class="card-text text-muted small mb-2">
+                                <i class="bi bi-tag"></i>
+                                @if (!string.IsNullOrEmpty(item.AgeRating))
+                                {
+                                    <span>@item.AgeRating anos</span>
+                                }
+                                @if (!item.IsAvailable)
+                                {
+                                    <span class="badge bg-danger ms-2">Indisponível</span>
+                                }
+                            </p>
+                            @if (!string.IsNullOrEmpty(item.Description))
+                            {
+                                <p class="card-text small flex-grow-1">
+                                    @(item.Description.Length > 100 ? item.Description[..100] + "..." : item.Description)
+                                </p>
+                            }
+                            <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top">
+                                <strong class="fs-5 text-primary">@item.Price.ToString("C2")</strong>
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary" title="Editar">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-outline-info" title="Detalhes">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Excluir">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        @if (Model.TotalPages > 1)
+        {
+            <nav class="mt-4" aria-label="Navegação de páginas">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item @(Model.CurrentPage <= 1 ? "disabled" : "")">
+                        <a asp-page="./Index"
+                           asp-route-SearchTitle="@Model.SearchTitle"
+                           asp-route-SearchGenre="@Model.SearchGenre"
+                           asp-route-SearchRating="@Model.SearchRating"
+                           asp-route-CurrentPage="@(Model.CurrentPage - 1)"
+                           class="page-link">
+                            <i class="bi bi-chevron-left"></i> Anterior
+                        </a>
+                    </li>
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                            <a asp-page="./Index"
+                               asp-route-SearchTitle="@Model.SearchTitle"
+                               asp-route-SearchGenre="@Model.SearchGenre"
+                               asp-route-SearchRating="@Model.SearchRating"
+                               asp-route-CurrentPage="@i"
+                               class="page-link">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")">
+                        <a asp-page="./Index"
+                           asp-route-SearchTitle="@Model.SearchTitle"
+                           asp-route-SearchGenre="@Model.SearchGenre"
+                           asp-route-SearchRating="@Model.SearchRating"
+                           asp-route-CurrentPage="@(Model.CurrentPage + 1)"
+                           class="page-link">
+                            Próximo <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        }
+
+        <p class="text-muted text-center mt-2">
+            Exibindo @Model.Movie.Count() filme(s) — Página @Model.CurrentPage de @Model.TotalPages
+        </p>
+    }
+</div>
+
+@section Styles {
+    <style>
+        .movie-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .movie-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+    </style>
+}

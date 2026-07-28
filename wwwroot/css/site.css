@@ -1,0 +1,126 @@
+/* ────────────────────────────────────────────
+   RazorPagesMovie — Professional Styles
+   ──────────────────────────────────────────── */
+
+/* Base typography */
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 0;
+}
+
+/* Focus styles for accessibility */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    outline: none;
+}
+
+/* Form floating overrides */
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* Card hover effects */
+.card {
+    transition: box-shadow 0.2s ease;
+}
+
+.card.shadow-sm:hover {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Navbar active link */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    font-weight: 600;
+}
+
+/* Badge styling */
+.badge {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+}
+
+/* Pagination styling */
+.page-link {
+    border-radius: 0.25rem;
+    margin: 0 0.1rem;
+}
+
+.page-item.active .page-link {
+    font-weight: 600;
+}
+
+/* Alert animations */
+.alert-dismissible {
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer styling */
+.footer a:hover {
+    color: #fff !important;
+    text-decoration: underline !important;
+}
+
+/* Button hover enhancements */
+.btn {
+    transition: all 0.15s ease;
+}
+
+.btn-lg {
+    border-radius: 0.5rem;
+}
+
+/* Table improvements */
+.table th {
+    font-weight: 600;
+    border-top: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    .btn-lg {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+    }
+}

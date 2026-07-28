@@ -1,0 +1,54 @@
+# Padrões .NET
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.nupkg
+*.snupkg
+*.user
+*.suo
+*.sln.docstates
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Diretórios de build
+dist/
+artifacts/
+coverage/
+.coverage
+
+# Logs
+*.log
+logs/
+
+# Banco de dados
+*.db
+*.sqlite
+*.sqlite3
+app.db
+
+# Configurações locais (não commitar)
+appsettings.local.json
+appsettings.*.local.json
+
+# Cache local do Rider
+.idea/
+
+# VS Code
+.vscode/settings.json
+.vscode/launch.json
+
+# Ambiente (variáveis de ambiente locais)
+.env
+.env.local
+
+# NuGet
+.nuget/
+
+# Temp
+tmp/
+temp/
